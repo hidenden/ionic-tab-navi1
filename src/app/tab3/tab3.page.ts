@@ -15,7 +15,7 @@ export class Tab3Page {
 
   navigateTab2() {
     console.log('Navigate to Tab2');
-    this.router.navigate(['']);
+    this.router.navigate(['tabs', 'tab2']);
   }
 
 }
