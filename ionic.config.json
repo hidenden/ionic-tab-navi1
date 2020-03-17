@@ -1,5 +1,7 @@
 {
   "name": "tab-navi1",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
