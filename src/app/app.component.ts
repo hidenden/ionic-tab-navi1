@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, NgZone } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
@@ -16,6 +17,8 @@ export class AppComponent {
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     private push: Push,
+    private router: Router,
+    private ngZone: NgZone,
   ) {
     this.initializeApp();
   }
@@ -57,6 +60,13 @@ export class AppComponent {
     });
   }
 
+  pushNavigation() {
+    console.log('Navigate to Tab2');
+    this.ngZone.run(() => {
+      this.router.navigate(['tabs', 'tab2']);
+    });
+  }
+
   preparePushNotification(pushObject: PushObject) {
     pushObject.on('registration').subscribe((data: any) => {
       console.log('device token -> ' + data.registrationId);
@@ -71,7 +81,8 @@ export class AppComponent {
         console.log('Received in foreground');
       } else if (data.additionalData.coldstart) {
         console.log('Push notification clicked');
-        console.log('ADD NAVIGATION HERE');
+        this.pushNavigation();
+        // console.log('ADD NAVIGATION HERE');
       } else {
         console.log('App returned from background');
       }
